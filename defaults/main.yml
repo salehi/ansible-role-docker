@@ -64,3 +64,8 @@ docker_users: []
 
 # Docker daemon options as a dict
 docker_daemon_options: {}
+
+# Proxy environment variables passed to all tasks that make outbound network calls.
+# Leave empty (default) for no proxy. Accepts any standard proxy keys:
+# http_proxy, https_proxy, no_proxy, all_proxy, etc.
+docker_proxy_env: {}

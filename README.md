@@ -144,6 +144,32 @@ docker_daemon_options:
     max-size: "100m"
 ```
 
+```yaml
+docker_proxy_env: {}
+```
+
+Proxy environment variables to inject into every task that makes an outbound network call (package installation, GPG key fetch, repo setup, docker-compose binary download). When left empty (the default), behavior is identical to upstream — no regression.
+
+Accepts any standard proxy keys (`http_proxy`, `https_proxy`, `no_proxy`, `all_proxy`, etc.) which are passed through as-is to each task's environment. Example:
+
+```yaml
+- hosts: docker
+  roles:
+    - role: geerlingguy.docker
+      vars:
+        docker_proxy_env:
+          https_proxy: "http://user:pass@proxy.example.com:7777"
+          no_proxy: "localhost,127.0.0.1,mirror.local"
+```
+
+You can also use a SOCKS proxy via `all_proxy` instead of HTTP proxies — but do not set both `all_proxy` and `http_proxy`/`https_proxy` at the same time, as tools handle the combination inconsistently:
+
+```yaml
+docker_proxy_env:
+  all_proxy: "socks5://proxy.example.com:1080"
+  no_proxy: "localhost,127.0.0.1"
+```
+
 ## Use with Ansible (and `docker` Python library)
 
 Many users of this role wish to also use Ansible to then _build_ Docker images and manage Docker containers on the server where Docker is installed. In this case, you can easily add in the `docker` Python library using the `geerlingguy.pip` role:

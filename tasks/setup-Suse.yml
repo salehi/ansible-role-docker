@@ -14,11 +14,13 @@
     repo: "{{ docker_zypper_repo_url }}"
     state: present
     auto_import_keys: yes
+  environment: "{{ docker_proxy_env }}"
   when: docker_add_repo | bool
 
 # Refresh zypper repositories only if the repo was added
 - name: Refresh zypper repositories
   command: zypper --non-interactive refresh
+  environment: "{{ docker_proxy_env }}"
   when: docker_add_repo | bool
   register: zypper_refresh
   changed_when: false  # idempotent for Molecule

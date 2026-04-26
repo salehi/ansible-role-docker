@@ -26,6 +26,7 @@
       - ca-certificates
       - python3-debian
     state: present
+  environment: "{{ docker_proxy_env }}"
 
 - name: Add or remove Docker repository.
   ansible.builtin.deb822_repository:
@@ -36,6 +37,7 @@
     components: "{{ docker_apt_release_channel }}"
     signed_by: "{{ docker_apt_gpg_key }}"
     state: "{{ 'present' if docker_add_repo | bool else 'absent' }}"
+  environment: "{{ docker_proxy_env }}"
   notify: apt update
 
 - name: Ensure handlers are notified immediately to update the apt cache.

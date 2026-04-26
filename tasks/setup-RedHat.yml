@@ -8,6 +8,7 @@
   rpm_key:
     key: "{{ docker_yum_gpg_key }}"
     state: present
+  environment: "{{ docker_proxy_env }}"
   when: docker_add_repo | bool
 
 - name: Add Docker repository.
@@ -17,6 +18,7 @@
     owner: root
     group: root
     mode: 0644
+  environment: "{{ docker_proxy_env }}"
   when: docker_add_repo | bool
 
 - name: Remove Docker Nightly repo.
