@@ -4,6 +4,8 @@
 
 An Ansible Role that installs [Docker](https://www.docker.com) on Linux.
 
+> **Note:** This is a fork of [geerlingguy.docker](https://github.com/geerlingguy/ansible-role-docker) that adds a `docker_proxy_env` variable, so the role can install Docker through an HTTP/SOCKS proxy (useful where `download.docker.com` is geo-blocked). All credit for the original role goes to Jeff Geerling. Published to Galaxy as `salehi.docker`.
+
 ## Requirements
 
 None.
