@@ -1,6 +1,6 @@
 # Ansible Role: Docker
 
-[![CI](https://github.com/geerlingguy/ansible-role-docker/actions/workflows/ci.yml/badge.svg)](https://github.com/geerlingguy/ansible-role-docker/actions/workflows/ci.yml)
+[![CI](https://github.com/salehi/ansible-role-docker/actions/workflows/ci.yml/badge.svg)](https://github.com/salehi/ansible-role-docker/actions/workflows/ci.yml)
 
 An Ansible Role that installs [Docker](https://www.docker.com) on Linux.
 
@@ -157,7 +157,7 @@ Accepts any standard proxy keys (`http_proxy`, `https_proxy`, `no_proxy`, `all_p
 ```yaml
 - hosts: docker
   roles:
-    - role: geerlingguy.docker
+    - role: salehi.docker
       vars:
         docker_proxy_env:
           https_proxy: "http://user:pass@proxy.example.com:7777"
@@ -185,7 +185,7 @@ Many users of this role wish to also use Ansible to then _build_ Docker images a
 
   roles:
     - geerlingguy.pip
-    - geerlingguy.docker
+    - salehi.docker
 ```
 
 ## Dependencies
@@ -197,7 +197,7 @@ None.
 ```yaml
 - hosts: all
   roles:
-    - geerlingguy.docker
+    - salehi.docker
 ```
 
 ## License
