@@ -80,7 +80,7 @@ docker_compose_url: "https://github.com/docker/compose/releases/download/{{ dock
 docker_compose_path: /usr/local/bin/docker-compose
 ```
 
-Docker Compose installation options.
+Docker Compose installation options. Set `docker_compose_version` to a specific tag (e.g. `v2.32.1`) to pin a release, or to `latest` to query the GitHub API at run time and install the most recent release.
 
 ```yaml
 docker_add_repo: true

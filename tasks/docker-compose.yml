@@ -1,4 +1,22 @@
 ---
+- name: Resolve latest Docker Compose release version.
+  when: docker_compose_version == "latest"
+  block:
+    - name: Get latest Docker Compose release from GitHub.
+      uri:
+        url: https://api.github.com/repos/docker/compose/releases/latest
+        method: GET
+        return_content: true
+        status_code: 200
+        body_format: json
+      environment: "{{ docker_proxy_env }}"
+      register: docker_compose_latest_release
+      check_mode: false
+
+    - name: Set Docker Compose version to latest release tag.
+      set_fact:
+        docker_compose_version: "{{ docker_compose_latest_release.json.tag_name }}"
+
 - name: Check current docker-compose version.
   command: "{{ docker_compose_path }} --version"
   register: docker_compose_vsn

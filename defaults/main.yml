@@ -33,6 +33,8 @@ docker_compose_package_state: present
 
 # Docker Compose options.
 docker_install_compose: false
+# Pin a specific release (e.g. "v2.32.1"), or set to "latest" to query the
+# GitHub API and install the most recent release at run time.
 docker_compose_version: "v2.32.1"
 docker_compose_arch: "{{ ansible_facts.architecture }}"
 docker_compose_url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-linux-{{ docker_compose_arch }}"
