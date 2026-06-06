@@ -69,3 +69,11 @@ docker_daemon_options: {}
 # Leave empty (default) for no proxy. Accepts any standard proxy keys:
 # http_proxy, https_proxy, no_proxy, all_proxy, etc.
 docker_proxy_env: {}
+
+# Before the OS-specific setup tasks run, query a remote endpoint to display the
+# host's public egress IP. Useful for confirming which IP (or proxy) is used to
+# reach the Docker package repositories. Set to false to skip the outbound request.
+docker_egress_ip_check: true
+# Endpoint queried to determine the egress IP. Any service that returns the IP as
+# plain text works, e.g. https://ifconfig.me/ip, https://api.ipify.org, https://icanhazip.com.
+docker_egress_ip_check_url: "https://ifconfig.io/ip"

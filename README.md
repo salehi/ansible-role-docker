@@ -172,6 +172,15 @@ docker_proxy_env:
   no_proxy: "localhost,127.0.0.1"
 ```
 
+```yaml
+docker_egress_ip_check: true
+docker_egress_ip_check_url: "https://ifconfig.io/ip"
+```
+
+Before the OS-specific setup tasks run, the role queries `docker_egress_ip_check_url` and prints the host's public egress IP. This makes it easy to confirm which IP (or proxy) is used to reach the Docker package repositories — handy alongside `docker_proxy_env`. The request honours `docker_proxy_env`, and a failure (no connectivity, blocked endpoint) is ignored so it never aborts the install.
+
+The endpoint is fully configurable; any service that returns the IP as plain text works, e.g. `https://ifconfig.me/ip`, `https://api.ipify.org`, or `https://icanhazip.com`. Set `docker_egress_ip_check: false` to skip the outbound request entirely.
+
 ## Use with Ansible (and `docker` Python library)
 
 Many users of this role wish to also use Ansible to then _build_ Docker images and manage Docker containers on the server where Docker is installed. In this case, you can easily add in the `docker` Python library using the `geerlingguy.pip` role:

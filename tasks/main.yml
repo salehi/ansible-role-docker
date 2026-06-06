@@ -10,6 +10,25 @@
       paths:
         - 'vars'
 
+- name: Determine host egress IP address.
+  ansible.builtin.uri:
+    url: "{{ docker_egress_ip_check_url }}"
+    return_content: true
+  environment: "{{ docker_proxy_env }}"
+  register: docker_egress_ip_result
+  changed_when: false
+  check_mode: false
+  ignore_errors: true
+  when: docker_egress_ip_check | bool
+
+- name: Display host egress IP address.
+  debug:
+    msg: "Host egress IP: {{ docker_egress_ip_result.content | default('') | trim }}"
+  when:
+    - docker_egress_ip_check | bool
+    - docker_egress_ip_result is not skipped
+    - docker_egress_ip_result is not failed
+
 - include_tasks: setup-RedHat.yml
   when: ansible_facts.os_family == 'RedHat'
 
